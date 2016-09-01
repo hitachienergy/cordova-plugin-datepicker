@@ -55,6 +55,8 @@ module.exports = {
             }
             */
 
+            var translateService = angular.element(document.body).injector().get('$translate');
+
             if (options.date) {
                 var dateParts = options.date.split("/");
 
@@ -90,7 +92,7 @@ module.exports = {
 
 
             var pickerDivTable = document.createElement("div");
-            pickerDivTable.style.cssText = "width:90%; height: 90%; display: table; text-align:center; margin: 0 auto; padding:0;";
+            pickerDivTable.style.cssText = "width:90%; height: 90%; display: table; text-align:center; margin: 0 auto; padding:0; color:#FFF;";
 
             var pickerDiv = document.createElement("div");
             pickerDiv.id = "winjsdatetimepickerContainer";
@@ -124,7 +126,7 @@ module.exports = {
 
                     if (i == 0) {
                         timePickerSelect.id = "winjsdatepickerHours";
-                        descriptionElement.textContent = "hours";
+                        descriptionElement.textContent = translateService.instant('TIME_HH');
 
                         for (var h = 0; h <= 23; h++) {
                             var option = document.createElement("option");
@@ -140,7 +142,7 @@ module.exports = {
                     }
                     else if (i == 1) {
                         timePickerSelect.id = "winjsdatepickerMinutes";
-                        descriptionElement.textContent = "minutes";
+                        descriptionElement.textContent = translateService.instant('TIME_MM');
 
                         for (var m = 0 ; m <= 59; m++) {
                             var option = document.createElement("option");
@@ -188,7 +190,7 @@ module.exports = {
                     datePickerSelect.setAttribute("data-tap-disabled","true");
                     if (i == 0) {
                         datePickerSelect.id = "winjsdatepickerYear";
-                        descriptionElement.textContent = "year";
+                        descriptionElement.textContent = translateService.instant('DATE_YYYY');
 
                         for (var y=1970; y<=2050; y++) {
                             var option = document.createElement("option");
@@ -206,7 +208,7 @@ module.exports = {
                     }
                     else if (i == 1) {
                         datePickerSelect.id = "winjsdatepickerMonth";
-                        descriptionElement.textContent = "month";
+                        descriptionElement.textContent = translateService.instant('DATE_MM');
 
                         for (var m=1 ; m<=12; m++) {
                             var option = document.createElement("option");
@@ -222,7 +224,7 @@ module.exports = {
                     }
                     else if (i == 2) {
                         datePickerSelect.id = "winjsdatepickerDay";
-                        descriptionElement.textContent = "day";
+                        descriptionElement.textContent = translateService.instant('DATE_DD');
 
                         for (var d=1; d<=31; d++) {
                             var option = document.createElement("option");
@@ -311,7 +313,7 @@ module.exports = {
             overlayFooter.appendChild(rightCell);
 
             var cancelButton = document.createElement("button");
-            cancelButton.innerText = "Cancel";
+            cancelButton.innerText = translateService.instant('CANCEL');
             cancelButton.style.cssText = buttonCSSText;
 
             cancelButton.addEventListener("click", function(){
@@ -323,7 +325,7 @@ module.exports = {
             rightCell.appendChild(cancelButton);
 
             var useButton = document.createElement("button");
-            useButton.innerText = "Use";
+            useButton.innerText = translateService.instant('SELECT');
             useButton.style.cssText = buttonCSSText;
 		
             useButton.addEventListener("click", function () {
