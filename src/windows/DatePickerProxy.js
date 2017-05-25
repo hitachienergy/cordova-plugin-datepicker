@@ -82,7 +82,7 @@ module.exports = {
                 options.maxDate = new Date("2050-01-01T00:00:00");
             }
             
-            var buttonCSSText = "border: 3px solid white; background:#000; color:#FFF; border-radius:0; width: 90%; height: 90%; font-size: 2em; overflow: hidden; text-overflow: ellipsis"
+            var buttonCSSText = "border: 3px solid white; background:#000; color:#FFF; border-radius:0; width: 90%; height: 90%; font-size: 2em; overflow: hidden; text-overflow: ellipsis;"
 
             var overlay = document.createElement("div");
             var overlay_id = "winjsoverlay";
