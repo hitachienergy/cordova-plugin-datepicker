@@ -31,7 +31,8 @@ DatePicker.prototype.show = function(options, cb) {
 		(options.date.getDate()) + "/" +
 		(options.date.getFullYear()) + "/" +
 		(options.date.getHours()) + "/" +
-		(options.date.getMinutes());
+		(options.date.getMinutes()) + "/" +
+		(options.date.getSeconds());
 	}
 	var defaults = {
 		mode : 'date',

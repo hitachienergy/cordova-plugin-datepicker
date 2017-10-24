@@ -63,9 +63,10 @@ module.exports = {
                 var month = dateParts[0] <= 9 ? '0' + dateParts[0] : dateParts[0],
                     day = dateParts[1] <= 9 ? '0' + dateParts[1] : dateParts[1],
                     hours = dateParts[3] <= 9 ? '0' + dateParts[3] : dateParts[3],
-                    minutes = dateParts[4] <= 9 ? '0' + dateParts[4] : dateParts[4];
+                    minutes = dateParts[4] <= 9 ? '0' + dateParts[4] : dateParts[4],
+                    seconds = dateParts[5] <= 9 ? '0' + dateParts[5] : dateParts[5];
 
-                var dateTimeString = "" + dateParts[2] + "-" + month + "-" + day + "T" + hours + ":" + minutes + ":00";
+                var dateTimeString = "" + dateParts[2] + "-" + month + "-" + day + "T" + hours + ":" + minutes + ":" + seconds;
 
                 options.date = new Date(dateTimeString);
 
@@ -111,7 +112,7 @@ module.exports = {
                 var timePickerInputRow = document.createElement("tr");
                 timePickerTable.appendChild(timePickerInputRow);
 
-                for (var i = 0; i < 2; i++) {
+                for (var i = 0; i < 3; i++) {
                     var descriptionElement = document.createElement("td");
                     timePickerDescriptionRow.appendChild(descriptionElement);
 
@@ -150,6 +151,21 @@ module.exports = {
                             option.value = m;
 
                             if (m == options.date.getMinutes()) {
+                                option.setAttribute("selected", "selected");
+                            }
+
+                            timePickerSelect.appendChild(option);
+                        }
+                    } else if (i == 2) {
+                        timePickerSelect.id = "winjsdatepickerSeconds";
+                        descriptionElement.textContent = translateService.instant('TIME_SS');
+
+                        for (var s = 0 ; s <= 59; s++) {
+                            var option = document.createElement("option");
+                            option.textContent = s <= 9 ? "0" + s : s;
+                            option.value = s;
+
+                            if (s == options.date.getSeconds()) {
                                 option.setAttribute("selected", "selected");
                             }
 
@@ -334,7 +350,8 @@ module.exports = {
                     month = document.getElementById("winjsdatepickerMonth"),
                     day = document.getElementById("winjsdatepickerDay"),
                     hours = document.getElementById("winjsdatepickerHours"),
-                    minutes = document.getElementById("winjsdatepickerMinutes");
+                    minutes = document.getElementById("winjsdatepickerMinutes"),
+                    seconds = document.getElementById("winjsdatepickerSeconds");
 
                 var dateTimeStr = "";
 
@@ -346,7 +363,7 @@ module.exports = {
                 }
 
                 if (pickertype.indexOf("time") >= 0) {
-                    dateTimeStr = dateTimeStr + "T" + (hours.value <= 9 ? "0" + hours.value : hours.value) + ":" + (minutes.value <= 9 ? "0" + minutes.value : minutes.value) + ":00";
+                    dateTimeStr = dateTimeStr + "T" + (hours.value <= 9 ? "0" + hours.value : hours.value) + ":" + (minutes.value <= 9 ? "0" + minutes.value : minutes.value) + ":" + (seconds.value <= 9 ? "0" + seconds.value : seconds.value);
                 }
                 
                 overlay.parentElement.removeChild(overlay);
