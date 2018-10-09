@@ -317,7 +317,7 @@ module.exports = {
             overlay.appendChild(pickerDivTable);
 
             overlayFooter = document.createElement("div");
-            overlayFooter.style.cssText = "position: fixed; bottom:0; left:0; right:0; z-index: 1000; width: 100%; height: 10%; display: table; text-align:center; vertical-align:middle;";
+            overlayFooter.style.cssText = "position: fixed; table-layout: fixed; bottom:0; left:0; right:0; z-index: 1000; width: 100%; height: 10%; display: table; text-align:center; vertical-align:middle;";
             overlay.appendChild(overlayFooter);
 
             var leftCell = document.createElement("div");
