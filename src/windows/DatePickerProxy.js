@@ -55,18 +55,15 @@ module.exports = {
             }
             */
 
-            var translateService = angular.element(document.body).injector().get('$translate');
-
             if (options.date) {
                 var dateParts = options.date.split("/");
 
                 var month = dateParts[0] <= 9 ? '0' + dateParts[0] : dateParts[0],
                     day = dateParts[1] <= 9 ? '0' + dateParts[1] : dateParts[1],
                     hours = dateParts[3] <= 9 ? '0' + dateParts[3] : dateParts[3],
-                    minutes = dateParts[4] <= 9 ? '0' + dateParts[4] : dateParts[4],
-                    seconds = dateParts[5] <= 9 ? '0' + dateParts[5] : dateParts[5];
+                    minutes = dateParts[4] <= 9 ? '0' + dateParts[4] : dateParts[4];
 
-                var dateTimeString = "" + dateParts[2] + "-" + month + "-" + day + "T" + hours + ":" + minutes + ":" + seconds;
+                var dateTimeString = "" + dateParts[2] + "-" + month + "-" + day + "T" + hours + ":" + minutes + ":00";
 
                 options.date = new Date(dateTimeString);
 
@@ -83,7 +80,7 @@ module.exports = {
                 options.maxDate = new Date("2050-01-01T00:00:00");
             }
             
-            var buttonCSSText = "border: 3px solid white; background:#000; color:#FFF; border-radius:0; width: 90%; height: 90%; font-size: 2em; overflow: hidden; text-overflow: ellipsis;"
+            var buttonCSSText = "border: 3px solid white; background:#000; color:#FFF; border-radius:0; width: 90%; height: 90%; font-size: 2em;"
 
             var overlay = document.createElement("div");
             var overlay_id = "winjsoverlay";
@@ -93,7 +90,7 @@ module.exports = {
 
 
             var pickerDivTable = document.createElement("div");
-            pickerDivTable.style.cssText = "width:90%; height: 90%; display: table; text-align:center; margin: 0 auto; padding:0; color:#FFF;";
+            pickerDivTable.style.cssText = "width:90%; height: 90%; display: table; text-align:center; margin: 0 auto; padding:0;";
 
             var pickerDiv = document.createElement("div");
             pickerDiv.id = "winjsdatetimepickerContainer";
@@ -112,7 +109,7 @@ module.exports = {
                 var timePickerInputRow = document.createElement("tr");
                 timePickerTable.appendChild(timePickerInputRow);
 
-                for (var i = 0; i < 3; i++) {
+                for (var i = 0; i < 2; i++) {
                     var descriptionElement = document.createElement("td");
                     timePickerDescriptionRow.appendChild(descriptionElement);
 
@@ -127,7 +124,7 @@ module.exports = {
 
                     if (i == 0) {
                         timePickerSelect.id = "winjsdatepickerHours";
-                        descriptionElement.textContent = translateService.instant('TIME_HH');
+                        descriptionElement.textContent = "hours";
 
                         for (var h = 0; h <= 23; h++) {
                             var option = document.createElement("option");
@@ -143,7 +140,7 @@ module.exports = {
                     }
                     else if (i == 1) {
                         timePickerSelect.id = "winjsdatepickerMinutes";
-                        descriptionElement.textContent = translateService.instant('TIME_MM');
+                        descriptionElement.textContent = "minutes";
 
                         for (var m = 0 ; m <= 59; m++) {
                             var option = document.createElement("option");
@@ -151,21 +148,6 @@ module.exports = {
                             option.value = m;
 
                             if (m == options.date.getMinutes()) {
-                                option.setAttribute("selected", "selected");
-                            }
-
-                            timePickerSelect.appendChild(option);
-                        }
-                    } else if (i == 2) {
-                        timePickerSelect.id = "winjsdatepickerSeconds";
-                        descriptionElement.textContent = translateService.instant('TIME_SS');
-
-                        for (var s = 0 ; s <= 59; s++) {
-                            var option = document.createElement("option");
-                            option.textContent = s <= 9 ? "0" + s : s;
-                            option.value = s;
-
-                            if (s == options.date.getSeconds()) {
                                 option.setAttribute("selected", "selected");
                             }
 
@@ -206,7 +188,7 @@ module.exports = {
                     datePickerSelect.setAttribute("data-tap-disabled","true");
                     if (i == 0) {
                         datePickerSelect.id = "winjsdatepickerYear";
-                        descriptionElement.textContent = translateService.instant('DATE_YYYY');
+                        descriptionElement.textContent = "year";
 
                         for (var y=1970; y<=2050; y++) {
                             var option = document.createElement("option");
@@ -224,7 +206,7 @@ module.exports = {
                     }
                     else if (i == 1) {
                         datePickerSelect.id = "winjsdatepickerMonth";
-                        descriptionElement.textContent = translateService.instant('DATE_MM');
+                        descriptionElement.textContent = "month";
 
                         for (var m=1 ; m<=12; m++) {
                             var option = document.createElement("option");
@@ -240,7 +222,7 @@ module.exports = {
                     }
                     else if (i == 2) {
                         datePickerSelect.id = "winjsdatepickerDay";
-                        descriptionElement.textContent = translateService.instant('DATE_DD');
+                        descriptionElement.textContent = "day";
 
                         for (var d=1; d<=31; d++) {
                             var option = document.createElement("option");
@@ -317,7 +299,7 @@ module.exports = {
             overlay.appendChild(pickerDivTable);
 
             overlayFooter = document.createElement("div");
-            overlayFooter.style.cssText = "position: fixed; table-layout: fixed; bottom:0; left:0; right:0; z-index: 1000; width: 100%; height: 10%; display: table; text-align:center; vertical-align:middle;";
+            overlayFooter.style.cssText = "position: fixed; bottom:0; left:0; right:0; z-index: 1000; width: 100%; height: 10%; display: table; text-align:center; vertical-align:middle;";
             overlay.appendChild(overlayFooter);
 
             var leftCell = document.createElement("div");
@@ -329,7 +311,7 @@ module.exports = {
             overlayFooter.appendChild(rightCell);
 
             var cancelButton = document.createElement("button");
-            cancelButton.innerText = translateService.instant('CANCEL');
+            cancelButton.innerText = "Cancel";
             cancelButton.style.cssText = buttonCSSText;
 
             cancelButton.addEventListener("click", function(){
@@ -341,7 +323,7 @@ module.exports = {
             rightCell.appendChild(cancelButton);
 
             var useButton = document.createElement("button");
-            useButton.innerText = translateService.instant('SELECT');
+            useButton.innerText = "Use";
             useButton.style.cssText = buttonCSSText;
 		
             useButton.addEventListener("click", function () {
@@ -350,8 +332,7 @@ module.exports = {
                     month = document.getElementById("winjsdatepickerMonth"),
                     day = document.getElementById("winjsdatepickerDay"),
                     hours = document.getElementById("winjsdatepickerHours"),
-                    minutes = document.getElementById("winjsdatepickerMinutes"),
-                    seconds = document.getElementById("winjsdatepickerSeconds");
+                    minutes = document.getElementById("winjsdatepickerMinutes");
 
                 var dateTimeStr = "";
 
@@ -363,7 +344,7 @@ module.exports = {
                 }
 
                 if (pickertype.indexOf("time") >= 0) {
-                    dateTimeStr = dateTimeStr + "T" + (hours.value <= 9 ? "0" + hours.value : hours.value) + ":" + (minutes.value <= 9 ? "0" + minutes.value : minutes.value) + ":" + (seconds.value <= 9 ? "0" + seconds.value : seconds.value);
+                    dateTimeStr = dateTimeStr + "T" + (hours.value <= 9 ? "0" + hours.value : hours.value) + ":" + (minutes.value <= 9 ? "0" + minutes.value : minutes.value) + ":00";
                 }
                 
                 overlay.parentElement.removeChild(overlay);
